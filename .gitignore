@@ -8,3 +8,4 @@ gen/
 gen/*
 yarn-error.log
 gen
+.npmrc
