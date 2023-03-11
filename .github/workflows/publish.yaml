@@ -3,19 +3,19 @@ on:
   release:
     types: [created]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
-          registry-url: 'https://npm.pkg.github.com'
-      - name: Install dependencies and build 🔧
-        run: npm ci && npm run build
-      - name: Publish package on NPM 📦
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    buld-and-deploy:
+      runs-on: ubuntu-latest
+      steps:
+       - name: checkout to repositor
+         uses: actions/checkout@v2
+       - name: install and build
+         run: npm ci
+       - name: publish to registry
+         uses: actions/setup-node@v2
+         with:
+           node-version: 16
+           registry-url: 'https://npm.pkg.github.com'
+           scope: '@alexsandrbarabash'
+       - run: npm publish
+         env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
